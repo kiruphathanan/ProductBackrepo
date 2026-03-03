@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Plus, PackageOpen } from 'lucide-react';
 import type { Product } from '../../types';
 import ProductTable from '../ProductTable/ProductTable';
@@ -6,22 +6,6 @@ import Pagination from '../Pagination/Pagination';
 import AddProductModal from '../AddProductModal/AddProductModal';
 import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
 import './ProductList.css';
-
-// Initial Mock Data
-const INITIAL_PRODUCTS: Product[] = [
-    { id: '1', name: 'Premium Wireless Headphones', price: 12999.00, stock: 45 },
-    { id: '2', name: 'Ergonomic Office Chair', price: 8500.50, stock: 12 },
-    { id: '3', name: 'Mechanical Keyboard (Cherry MX)', price: 7490.00, stock: 0 },
-    { id: '4', name: '4K Ultra HD Monitor', price: 24900.00, stock: 8 },
-    { id: '5', name: 'USB-C Hub Pro', price: 2999.99, stock: 120 },
-    { id: '6', name: 'Smart Home Hub', price: 9999.00, stock: 34 },
-    { id: '7', name: 'Noise Cancelling Earbuds', price: 15999.00, stock: 56 },
-    { id: '8', name: 'Portable SSD 2TB', price: 11999.00, stock: 23 },
-    { id: '9', name: 'Wireless Gaming Mouse', price: 4999.00, stock: 15 },
-    { id: '10', name: 'Standing Desk Converter', price: 14500.00, stock: 5 },
-    { id: '11', name: 'Podcast Microphone', price: 6500.50, stock: 42 },
-    { id: '12', name: 'Webcam 1080p', price: 3499.00, stock: 88 },
-];
 
 const ITEMS_PER_PAGE = 7;
 
@@ -198,7 +182,7 @@ export default function ProductList() {
             <div className="product-list-content">
                 {isLoading ? (
                     <SkeletonLoader />
-                ) : filteredProducts.length === 0 ? (
+                ) : products.length === 0 ? (
                     <div className="empty-state">
                         <PackageOpen size={48} className="empty-icon text-muted" />
                         <h3>No products found</h3>
@@ -213,7 +197,7 @@ export default function ProductList() {
                 )}
             </div>
 
-            {!isLoading && filteredProducts.length > 0 && (
+            {!isLoading && products.length > 0 && (
                 <div className="product-list-footer">
                     <Pagination
                         currentPage={currentPage}
