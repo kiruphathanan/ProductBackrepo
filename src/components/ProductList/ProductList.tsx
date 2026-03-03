@@ -51,10 +51,12 @@ export default function ProductList() {
     };
 
     // Real API Fetch
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/products';
+
     const fetchProducts = async () => {
         setIsLoading(true);
         try {
-            const res = await fetch(`http://localhost:5000/api/products?search=${searchTerm}&page=${currentPage}&limit=${ITEMS_PER_PAGE}`);
+            const res = await fetch(`${API_URL}?search=${searchTerm}&page=${currentPage}&limit=${ITEMS_PER_PAGE}`);
             if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
@@ -96,7 +98,8 @@ export default function ProductList() {
                 // Optimistic UI Update
                 setProducts(products.map(p => p.id === productToEdit.id ? { ...productData, id: p.id } : p));
 
-                const res = await fetch(`http://localhost:5000/api/products/${productToEdit.id}`, {
+                const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/products';
+                const res = await fetch(`${API_URL}/${productToEdit.id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(productData)
@@ -110,7 +113,8 @@ export default function ProductList() {
                 const tempId = Math.random().toString(36).substr(2, 9);
                 setProducts([{ ...productData, id: tempId }, ...products]);
 
-                const res = await fetch(`http://localhost:5000/api/products`, {
+                const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/products';
+                const res = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(productData)
@@ -140,7 +144,8 @@ export default function ProductList() {
                 setProducts(products.filter(p => p.id !== targetId));
                 setProductToDelete(null);
 
-                const res = await fetch(`http://localhost:5000/api/products/${targetId}`, {
+                const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/products';
+                const res = await fetch(`${API_URL}/${targetId}`, {
                     method: 'DELETE'
                 });
                 if (!res.ok) {
