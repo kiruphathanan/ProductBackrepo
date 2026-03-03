@@ -1,0 +1,121 @@
+.product-list-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 140px);
+    /* Fill available space minus padding */
+}
+
+.product-list-header {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 16px;
+    background: rgba(14, 14, 17, 0.5);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.product-list-header h2 {
+    font-size: 20px;
+    margin: 0;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.product-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.product-list-content {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    items-align: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding: 48px;
+    color: var(--text-muted);
+}
+
+.empty-state .empty-icon {
+    margin: 0 auto 16px;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.product-list-footer {
+    padding: 16px 32px;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-card);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Skeleton Loading Animation */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.skeleton-wrapper {
+    padding: 24px;
+}
+
+.skeleton-row {
+    display: flex;
+    gap: 24px;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-col {
+    height: 20px;
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.w-10 {
+    width: 10%;
+}
+
+.w-15 {
+    width: 15%;
+}
+
+.w-20 {
+    width: 20%;
+}
+
+.w-30 {
+    width: 30%;
+}
+
+@media (max-width: 640px) {
+    .product-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
